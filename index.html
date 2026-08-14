@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Aayush Dc | Profile</title>
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&family=Space+Grotesk:wght@500;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- FontAwesome Icons -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
+
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background: #08090d;
+        color: #e0e0e0;
+        min-height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        position: relative;
+        user-select: none;
+      }
+
+      /* 1. Animated Click to Enter Overlay Screen */
+      .enter-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: #050608;
+        z-index: 5000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: pointer;
+        transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+          transform 0.7s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.7s ease;
+      }
+
+      .enter-overlay.hidden {
+        opacity: 0;
+        transform: scale(1.08);
+        visibility: hidden;
+        pointer-events: none;
+      }
+
+      .enter-box {
+        position: relative;
+        padding: 30px 55px;
+        border-radius: 20px;
+        background: rgba(16, 18, 25, 0.92);
+        border: 1px solid rgba(255, 255, 255, 0.18);
+        box-shadow: 0 0 35px rgba(255, 255, 255, 0.08);
+        text-align: center;
+        animation: pulseBox 3s infinite alternate ease-in-out;
+      }
+
+      /* Pulsing Glow Ring Animation Behind Enter Box */
+      .enter-box::before {
+        content: "";
+        position: absolute;
+        top: -10px;
+        left: -10px;
+        right: -10px;
+        bottom: -10px;
+        border-radius: 28px;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        animation: expandRing 2.5s infinite ease-out;
+        pointer-events: none;
+      }
+
+      @keyframes expandRing {
+        0% {
+          transform: scale(0.96);
+          opacity: 0.8;
+          border-color: rgba(255, 255, 255, 0.3);
+        }
+        100% {
+          transform: scale(1.08);
+          opacity: 0;
+          border-color: rgba(255, 255, 255, 0.02);
+        }
+      }
+
+      @keyframes pulseBox {
+        0% {
+          box-shadow: 0 0 20px rgba(255, 255, 255, 0.05),
+            inset 0 0 10px rgba(255, 255, 255, 0.02);
+          border-color: rgba(255, 255, 255, 0.15);
+        }
+        100% {
+          box-shadow: 0 0 45px rgba(255, 255, 255, 0.18),
+            inset 0 0 20px rgba(255, 255, 255, 0.05);
+          border-color: rgba(255, 255, 255, 0.35);
+        }
+      }
+
+      .enter-icon {
+        font-size: 26px;
+        color: #ffffff;
+        margin-bottom: 10px;
+        animation: floatIcon 2s infinite ease-in-out;
+      }
+
+      @keyframes floatIcon {
+        0%,
+        100% {
+          transform: translateY(0);
+        }
+        50% {
+          transform: translateY(-6px);
+        }
+      }
+
+      .enter-box h2 {
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 28px;
+        font-weight: 700;
+        color: #ffffff;
+        text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+        margin-bottom: 6px;
+        letter-spacing: 0.5px;
+      }
+
+      .enter-box p {
+        font-size: 13px;
+        color: #9aa0a6;
+        letter-spacing: 0.8px;
+      }
+
+      /* Ambient Dark Background Lighting */
+      .plated-glow {
+        position: absolute;
+        width: 650px;
+        height: 650px;
+        border-radius: 50%;
+        background: radial-gradient(
+          circle,
+          rgba(255, 255, 255, 0.03) 0%,
+          rgba(0, 0, 0, 0) 70%
+        );
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      /* 2. Floating Ambient Dots System */
+      #dots-container {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        overflow: hidden;
+        z-index: 1;
+      }
+
+      .floating-dot {
+        position: absolute;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.7);
+        box-shadow: 0 0 8px rgba(255, 255, 255, 0.6);
+        pointer-events: none;
+        will-change: transform, opacity;
+        animation: fadeFloat 4s ease-in-out forwards;
+      }
+
+      @keyframes fadeFloat {
+        0% {
+          opacity: 0;
+          transform: scale(0.2) translateY(0);
+        }
+        40% {
+          opacity: 0.8;
+          transform: scale(1) translateY(-15px);
+        }
+        100% {
+          opacity: 0;
+          transform: scale(0.3) translateY(-35px);
+        }
+      }
+
+      /* Dark Sleek Card with Dark Glow Border */
+      .card {
+        background: rgba(15, 17, 23, 0.9);
+        backdrop-filter: blur(18px);
+        -webkit-backdrop-filter: blur(18px);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 22px;
+        padding: 40px 30px;
+        width: 100%;
+        max-width: 380px;
+        text-align: center;
+        box-shadow: 0 0 30px rgba(255, 255, 255, 0.05),
+          0 20px 50px rgba(0, 0, 0, 0.95);
+        z-index: 10;
+        position: relative;
+        transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275),
+          border-color 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .card:hover {
+        transform: translateY(-4px);
+        border-color: rgba(255, 255, 255, 0.28);
+        box-shadow: 0 0 45px rgba(255, 255, 255, 0.1),
+          0 20px 50px rgba(0, 0, 0, 0.95);
+      }
+
+      /* Profile Wrapper & Continuous Flipping Photo Animation */
+      .profile-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 14px;
+        margin-bottom: 22px;
+        perspective: 1000px;
+      }
+
+      .profile-pic-frame {
+        width: 114px;
+        height: 114px;
+        border-radius: 50%;
+        padding: 3px;
+        background: linear-gradient(
+          135deg,
+          rgba(255, 255, 255, 0.25),
+          rgba(255, 255, 255, 0.05)
+        );
+        box-shadow: 0 0 20px rgba(255, 255, 255, 0.08);
+        animation: flipPhoto 6s infinite ease-in-out;
+        transform-style: preserve-3d;
+      }
+
+      @keyframes flipPhoto {
+        0% {
+          transform: rotateY(0deg);
+        }
+        50% {
+          transform: rotateY(180deg);
+        }
+        100% {
+          transform: rotateY(360deg);
+        }
+      }
+
+      .profile-pic {
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background-size: cover;
+        background-position: center;
+        border: 2px solid #08090d;
+        transition: opacity 0.3s ease;
+      }
+
+      .next-btn {
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        color: #d0d5dd;
+        padding: 8px 14px;
+        border-radius: 18px;
+        font-size: 12px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+
+      .next-btn:hover {
+        background: rgba(255, 255, 255, 0.15);
+        color: #ffffff;
+        border-color: rgba(255, 255, 255, 0.3);
+        transform: scale(1.05);
+        box-shadow: 0 0 12px rgba(255, 255, 255, 0.15);
+      }
+
+      .next-btn:active {
+        transform: scale(0.95);
+      }
+
+      /* 3. Non-Flickering Pop-Up Hover Wrappers */
+      .pop-wrapper {
+        display: inline-block;
+        cursor: pointer;
+        padding: 2px 6px;
+      }
+
+      .pop-text {
+        display: inline-block;
+        transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+          color 0.3s ease, text-shadow 0.3s ease;
+        will-change: transform;
+      }
+
+      .pop-wrapper:hover .pop-text {
+        transform: translateY(-5px) scale(1.06);
+        color: #ffffff !important;
+        text-shadow: 0 0 15px rgba(255, 255, 255, 0.4);
+      }
+
+      h1 {
+        font-family: "Space Grotesk", sans-serif;
+        font-size: 28px;
+        font-weight: 700;
+        letter-spacing: 0.5px;
+        margin-bottom: 8px;
+        color: #ffffff;
+      }
+
+      .info-container {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        margin-bottom: 6px;
+      }
+
+      .info-text {
+        font-size: 13px;
+        color: #9097a2;
+        font-weight: 400;
+        letter-spacing: 0.3px;
+      }
+
+      .quote {
+        font-size: 14px;
+        font-style: italic;
+        color: #a5abb5;
+        margin-top: 10px;
+        margin-bottom: 25px;
+      }
+
+      /* Social Icons */
+      .social-links {
+        display: flex;
+        justify-content: center;
+        gap: 12px;
+        margin-bottom: 25px;
+        flex-wrap: wrap;
+      }
+
+      .social-links a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.04);
+        color: #cccccc;
+        font-size: 17px;
+        text-decoration: none;
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+
+      .social-links a:hover {
+        transform: translateY(-4px) scale(1.12);
+        color: #ffffff;
+        background: rgba(255, 255, 255, 0.15);
+        border-color: rgba(255, 255, 255, 0.3);
+        box-shadow: 0 0 18px rgba(255, 255, 255, 0.2);
+      }
+
+      .social-links a:active {
+        transform: scale(0.9);
+      }
+
+      /* Action Buttons Area */
+      .action-btns {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        align-items: center;
+      }
+
+      .btn-style {
+        background: rgba(255, 255, 255, 0.04);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        color: #dddddd;
+        padding: 10px 22px;
+        border-radius: 20px;
+        font-family: "Poppins", sans-serif;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        width: 160px;
+        transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+
+      .btn-style:hover {
+        background: rgba(255, 255, 255, 0.12);
+        color: #ffffff;
+        border-color: rgba(255, 255, 255, 0.28);
+        transform: translateY(-2px);
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.1);
+      }
+
+      .btn-style:active {
+        transform: scale(0.95);
+      }
+
+      /* Full Screen Photo Modal */
+      .fullscreen-modal {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(5, 6, 8, 0.95);
+        z-index: 2000;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+      }
+
+      .fullscreen-modal.active {
+        display: flex;
+        opacity: 1;
+      }
+
+      .fullscreen-img {
+        width: 100vw;
+        height: 100vh;
+        object-fit: contain;
+        animation: expandFromCorners 0.4s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+      }
+
+      @keyframes expandFromCorners {
+        0% {
+          clip-path: polygon(50% 50%, 50% 50%, 50% 50%, 50% 50%);
+          transform: scale(0.6);
+        }
+        100% {
+          clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%);
+          transform: scale(1);
+        }
+      }
+
+      .close-btn {
+        position: absolute;
+        top: 25px;
+        right: 30px;
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.25);
+        color: #ffffff;
+        width: 45px;
+        height: 45px;
+        border-radius: 50%;
+        font-size: 22px;
+        cursor: pointer;
+        z-index: 2100;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.3s ease;
+      }
+
+      .close-btn:hover {
+        background: rgba(255, 255, 255, 0.25);
+        transform: scale(1.1) rotate(90deg);
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+      }
+
+      /* Spark Click Particles */
+      .spark {
+        position: absolute;
+        pointer-events: none;
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        z-index: 9999;
+        background: #ffffff;
+        box-shadow: 0 0 8px rgba(255, 255, 255, 0.9);
+        animation: sparkFade 0.5s ease-out forwards;
+      }
+
+      @keyframes sparkFade {
+        0% {
+          transform: translate(0, 0) scale(1);
+          opacity: 1;
+        }
+        100% {
+          transform: translate(var(--dx), var(--dy)) scale(0);
+          opacity: 0;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- 1. Click to Enter Screen Overlay -->
+    <div id="enterOverlay" class="enter-overlay">
+      <div class="enter-box">
+        <div class="enter-icon"><i class="fa-solid fa-arrow-pointer"></i></div>
+        <h2>Click to enter</h2>
+        <p>Click anywhere to continue</p>
+      </div>
+    </div>
+
+    <!-- Ambient Dark Background Lighting -->
+    <div class="plated-glow"></div>
+
+    <!-- 2. Floating Dots Container -->
+    <div id="dots-container"></div>
+
+    <!-- Main Card -->
+    <div class="card">
+      <div class="profile-wrapper">
+        <div class="profile-pic-frame">
+          <div
+            class="profile-pic"
+            id="profilePic"
+            style="background-image: url('mypfp1.png')"
+          ></div>
+        </div>
+        <button class="next-btn" id="nextPfpBtn">Next ❯</button>
+      </div>
+
+      <!-- Non-flickering Pop-up Name & Info -->
+      <h1>
+        <span class="pop-wrapper">
+          <span class="pop-text">Aayush Dc</span>
+        </span>
+      </h1>
+
+      <div class="info-container">
+        <div>
+          <span class="pop-wrapper">
+            <span class="info-text pop-text">DOB: August 1, 2012</span>
+          </span>
+        </div>
+        <div>
+          <span class="pop-wrapper">
+            <span class="info-text pop-text">Real Name: Aayush Dc</span>
+          </span>
+        </div>
+        <div>
+          <span class="pop-wrapper">
+            <span class="info-text pop-text">Address: Nepal, Lumbini</span>
+          </span>
+        </div>
+      </div>
+
+      <div class="quote">
+        <span class="pop-wrapper">
+          <span class="pop-text">I'll don't say anything</span>
+        </span>
+      </div>
+
+      <!-- Social Media Links -->
+      <div class="social-links">
+        <a
+          href="https://www.youtube.com/@Djexo_YT_Grows"
+          target="_blank"
+          class="youtube"
+          title="YouTube"
+        >
+          <i class="fa-brands fa-youtube"></i>
+        </a>
+        <a
+          href="https://discord.gg/YSbNe5jnBT"
+          target="_blank"
+          class="discord"
+          title="Discord"
+        >
+          <i class="fa-brands fa-discord"></i>
+        </a>
+        <a
+          href="https://github.com/Aether-Sol"
+          target="_blank"
+          class="github"
+          title="GitHub"
+        >
+          <i class="fa-brands fa-github"></i>
+        </a>
+        <a
+          href="https://chat.whatsapp.com/Fn0WVC7fFGFE007yjvxgZJ?s=sh&p=a&ilr=0"
+          target="_blank"
+          class="whatsapp"
+          title="WhatsApp"
+        >
+          <i class="fa-brands fa-whatsapp"></i>
+        </a>
+        <a
+          href="https://www.facebook.com/share/1EjsueLc54/"
+          target="_blank"
+          class="facebook"
+          title="Facebook"
+        >
+          <i class="fa-brands fa-facebook"></i>
+        </a>
+      </div>
+
+      <div class="action-btns">
+        <button class="btn-style" id="musicToggle">
+          <i class="fa-solid fa-music" id="musicIcon"></i>
+          <span id="musicText">Play Music</span>
+        </button>
+        <button class="btn-style" id="seekBtn">
+          <i class="fa-solid fa-expand"></i>
+          <span>Seek</span>
+        </button>
+      </div>
+
+      <audio id="bgMusic" loop>
+        <source src="website-song.mp3" type="audio/mpeg" />
+      </audio>
+    </div>
+
+    <!-- Fullscreen Photo Modal -->
+    <div class="fullscreen-modal" id="photoModal">
+      <button class="close-btn" id="closeModalBtn">&times;</button>
+      <img src="money.png" alt="Full View" class="fullscreen-img" />
+    </div>
+
+    <script>
+      // 1. Enter Overlay & Autoplay Audio Logic
+      const enterOverlay = document.getElementById("enterOverlay");
+      const audio = document.getElementById("bgMusic");
+      const musicIcon = document.getElementById("musicIcon");
+      const musicText = document.getElementById("musicText");
+
+      let isPlaying = false;
+
+      function playAudio() {
+        audio
+          .play()
+          .then(() => {
+            musicIcon.className = "fa-solid fa-pause";
+            musicText.innerText = "Pause Music";
+            isPlaying = true;
+          })
+          .catch(() => {});
+      }
+
+      function pauseAudio() {
+        audio.pause();
+        musicIcon.className = "fa-solid fa-music";
+        musicText.innerText = "Play Music";
+        isPlaying = false;
+      }
+
+      enterOverlay.addEventListener("click", () => {
+        enterOverlay.classList.add("hidden");
+        if (!isPlaying) {
+          playAudio();
+        }
+      });
+
+      // 2. Manual Music Toggle
+      const musicToggleBtn = document.getElementById("musicToggle");
+      musicToggleBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        if (isPlaying) {
+          pauseAudio();
+        } else {
+          playAudio();
+        }
+      });
+
+      // 3. Profile Pic Switcher
+      const pfpList = ["mypfp1.png", "mypfp2.png"];
+      let currentPfpIndex = 0;
+      const profilePic = document.getElementById("profilePic");
+      const nextBtn = document.getElementById("nextPfpBtn");
+
+      nextBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        profilePic.style.opacity = "0.3";
+        setTimeout(() => {
+          currentPfpIndex = (currentPfpIndex + 1) % pfpList.length;
+          profilePic.style.backgroundImage = `url('${pfpList[currentPfpIndex]}')`;
+          profilePic.style.opacity = "1";
+        }, 150);
+      });
+
+      // 4. Random Floating Ambient Dots System
+      const dotsContainer = document.getElementById("dots-container");
+
+      function createDot() {
+        const dot = document.createElement("div");
+        dot.classList.add("floating-dot");
+
+        // Random positions across all sides of the screen
+        dot.style.left = `${Math.random() * 96 + 2}%`;
+        dot.style.top = `${Math.random() * 96 + 2}%`;
+
+        // Random dot size (2px to 5px)
+        const size = Math.random() * 3 + 2;
+        dot.style.width = `${size}px`;
+        dot.style.height = `${size}px`;
+
+        // Random animation duration
+        const duration = Math.random() * 2.5 + 3; // 3s to 5.5s
+        dot.style.animationDuration = `${duration}s`;
+
+        dotsContainer.appendChild(dot);
+
+        setTimeout(() => {
+          dot.remove();
+        }, duration * 1000);
+      }
+
+      // Spawn a dot every 220ms continuously
+      setInterval(createDot, 220);
+
+      // 5. Full-Screen Image Trigger (Seek)
+      const seekBtn = document.getElementById("seekBtn");
+      const photoModal = document.getElementById("photoModal");
+      const closeModalBtn = document.getElementById("closeModalBtn");
+
+      seekBtn.addEventListener("click", (e) => {
+        e.stopPropagation();
+        photoModal.classList.add("active");
+      });
+
+      function closeModal() {
+        photoModal.classList.remove("active");
+      }
+
+      closeModalBtn.addEventListener("click", closeModal);
+      photoModal.addEventListener("click", (e) => {
+        if (e.target === photoModal) closeModal();
+      });
+
+      // 6. Spark Particles on Any Screen Click
+      document.addEventListener("click", (e) => {
+        const particleCount = 8;
+        for (let i = 0; i < particleCount; i++) {
+          const spark = document.createElement("div");
+          spark.classList.add("spark");
+
+          spark.style.left = `${e.clientX}px`;
+          spark.style.top = `${e.clientY}px`;
+
+          const angle = Math.random() * Math.PI * 2;
+          const distance = Math.random() * 45 + 15;
+          const dx = `${Math.cos(angle) * distance}px`;
+          const dy = `${Math.sin(angle) * distance}px`;
+
+          spark.style.setProperty("--dx", dx);
+          spark.style.setProperty("--dy", dy);
+
+          document.body.appendChild(spark);
+
+          setTimeout(() => {
+            spark.remove();
+          }, 500);
+        }
+      });
+    </script>
+  </body>
+</html>
